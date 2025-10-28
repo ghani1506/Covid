@@ -1,67 +1,41 @@
-
-let running = false, last = 0, pyodide, model;
+let running = false, last = 0, pyodide, sim;
 const c = document.getElementById("c"), ctx = c.getContext("2d");
 const hud = document.getElementById("hud");
+const av = document.getElementById("av"); const a = document.getElementById("a");
 
-function $(id){return document.getElementById(id)}
-function fmtPct(x){return Math.round(x*100)+"%"}
+function sx(x){ return 16 + x*(c.width-32) }
+function sy(y){ return 16 + (1-y)*(c.height-32) }
 
 async function boot(){
   pyodide = await loadPyodide();
-  await pyodide.loadPackage([]);
   await pyodide.runPythonAsync(await (await fetch("sim.py")).text());
-  model = pyodide.globals.get("CovidModel")().toJs();
-  pyodide.globals.set("m", model);
+  sim = pyodide.runPython(`Sim()`);        // make a Python Sim instance
 
-  const binds = [
-    ["pop","popv",(v)=>v, (v)=>pyodide.runPython(`m.n_agents=${v}; m.reset()`), true],
-    ["mob","mobv",(v)=>Number(v).toFixed(2), (v)=>pyodide.runPython(`m.mobility=${v}`)],
-    ["mask","maskv",fmtPct, (v)=>pyodide.runPython(`m.mask_pct=${v}`)],
-    ["dist","distv",fmtPct, (v)=>pyodide.runPython(`m.distancing=${v}`)],
-    ["beta","betav",(v)=>Number(v).toFixed(2), (v)=>pyodide.runPython(`m.beta=${v}`)],
-    ["inc","incv",(v)=>Number(v).toFixed(1), (v)=>pyodide.runPython(`m.incubation_days=${v}`)],
-    ["inf","infv",(v)=>Number(v).toFixed(1), (v)=>pyodide.runPython(`m.infectious_days=${v}`)],
-    ["vax","vaxv",fmtPct, (v)=>pyodide.runPython(`m.vax_pct=${v}`)],
-  ];
-  for (const [id,lbl,fmt,apply,isReset] of binds){
-    $(id).oninput = e => {
-      $(lbl).textContent = fmt(e.target.value);
-      apply(e.target.value);
-      if(isReset){ running=false; }
-    }
-  }
+  a.oninput = e => {
+    av.textContent = Number(e.target.value).toFixed(2);
+    pyodide.runPython(`sim.set_param(${e.target.value})`, {globals: {sim}});
+  };
 
-  $("start").onclick = ()=> running = !running;
-  $("reset").onclick = async ()=>{
-    await pyodide.runPythonAsync("m.reset()");
-    running=false;
-  }
+  document.getElementById("start").onclick = ()=> running = !running;
+  document.getElementById("reset").onclick = ()=>{
+    sim = pyodide.runPython(`Sim()`); running = false; hud.textContent = "Ready";
+  };
 
   requestAnimationFrame(loop);
 }
 
 async function loop(ts){
-  const dt = Math.min(0.05, (ts - last)/1000 || 0);
-  last = ts;
+  const dt = Math.min(0.05, (ts - last)/1000 || 0); last = ts;
+  if(running){ await pyodide.runPythonAsync(`sim.step(${dt})`, {globals: {sim}}); }
 
-  if(running){
-    await pyodide.runPythonAsync(`m.step(${dt})`);
-  }
-  const agents = pyodide.runPython("[(a.x, a.y, a.state) for a in m.agents]").toJs();
-  const counts = pyodide.runPython("m.counts()").toJs();
-
+  const state = pyodide.runPython(`sim.state()`, {globals: {sim}}).toJs();
   ctx.clearRect(0,0,c.width,c.height);
   ctx.strokeStyle = "#ddd"; ctx.strokeRect(16,16,c.width-32,c.height-32);
-  const radius = 3, sx = (x)=>16 + x*(c.width-32), sy = (y)=>16 + (1-y)*(c.height-32);
-  for(const [x,y,s] of agents){
-    if(s==="S") ctx.fillStyle="#3485ff";
-    else if(s==="E") ctx.fillStyle="#ff9800";
-    else if(s==="I") ctx.fillStyle="#ff3333";
-    else if(s==="R") ctx.fillStyle="#19b24d";
-    else ctx.fillStyle="#9933ff";
-    ctx.beginPath(); ctx.arc(sx(x), sy(y), radius, 0, Math.PI*2); ctx.fill();
-  }
-  hud.textContent = `S:${counts.S}  E:${counts.E}  I:${counts.I}  R:${counts.R}  V:${counts.V}`;
+
+  ctx.fillStyle = "#3485ff";
+  ctx.beginPath(); ctx.arc(sx(state.x), sy(state.y), 6, 0, Math.PI*2); ctx.fill();
+
+  hud.textContent = `t=${state.t.toFixed(2)}  a=${state.a.toFixed(2)}`;
   requestAnimationFrame(loop);
 }
 
