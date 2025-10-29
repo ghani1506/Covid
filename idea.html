@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>COVID-19 Educational Simulation — Idea & Concept</title>
+  <style>
+    body {
+      font-family: "Segoe UI", Roboto, sans-serif;
+      background-color: #f5f7fa;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      line-height: 1.6;
+    }
+    header {
+      background-color: #1a73e8;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+      color: #1a73e8;
+    }
+    .concept {
+      background-color: #eef4ff;
+      border-left: 6px solid #1a73e8;
+      padding: 15px;
+      margin: 20px 0;
+    }
+    ul {
+      margin-top: 10px;
+      padding-left: 25px;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #777;
+      font-size: 0.9em;
+    }
+    a {
+      color: #1a73e8;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>COVID-19 Educational Simulation</h1>
+    <p>An Interactive Visualization for Understanding Disease Spread</p>
+  </header>
+
+  <main>
+    <section>
+      <h2>💡 Project Idea</h2>
+      <p>
+        This simulation was designed as an <strong>educational tool</strong> to help students, teachers, and the public
+        visualize how an infectious disease like COVID-19 spreads in a community.
+        It simplifies the epidemiological model into five visible states — <strong>Susceptible (S)</strong>,
+        <strong>Exposed (E)</strong>, <strong>Infectious (I)</strong>, <strong>Recovered (R)</strong>, and
+        <strong>Vaccinated (V)</strong>.
+      </p>
+
+      <div class="concept">
+        <p><strong>Goal:</strong> To make abstract public-health concepts (like transmission rate, mask use, or social distancing)
+        more tangible and interactive through simulation and data visualization.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>🔬 How It Works</h2>
+      <p>
+        The simulation represents individuals as colored dots moving randomly in an enclosed area. When an infectious individual
+        comes close to a susceptible one, there’s a chance the virus is transmitted. Over time, exposed individuals become infectious,
+        and later recover or gain immunity.
+      </p>
+
+      <ul>
+        <li><strong>Blue</strong> — Susceptible (healthy but can get infected)</li>
+        <li><strong>Orange</strong> — Exposed (infected but not yet infectious)</li>
+        <li><strong>Red</strong> — Infectious (can spread the virus)</li>
+        <li><strong>Green</strong> — Recovered (immune after infection)</li>
+        <li><strong>Purple</strong> — Vaccinated (reduced risk of infection)</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>⚙️ Adjustable Parameters</h2>
+      <p>
+        The simulation lets users adjust real-world factors to observe how they change the spread:
+      </p>
+      <ul>
+        <li>Population size</li>
+        <li>Mobility (movement speed)</li>
+        <li>Mask usage percentage</li>
+        <li>Social distancing level</li>
+        <li>Transmission probability (β)</li>
+        <li>Incubation & infectious durations</li>
+        <li>Vaccination coverage</li>
+      </ul>
+
+      <p>
+        These variables make it easy to explore “what if” scenarios — for example, increasing mask usage or lowering mobility can dramatically flatten the curve.
+      </p>
+    </section>
+
+    <section>
+      <h2>🎓 Educational Applications</h2>
+      <ul>
+        <li>Science and health classes — to discuss epidemics, infection dynamics, and prevention strategies</li>
+        <li>Mathematics — introducing the concept of exponential growth and rates</li>
+        <li>Data science — linking visual simulations with underlying data models (S-E-I-R-V framework)</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>🌐 Technology Stack</h2>
+      <ul>
+        <li><strong>Python (Pyodide)</strong> — simulation logic runs directly in the browser</li>
+        <li><strong>JavaScript + HTML Canvas</strong> — handles drawing and user interaction</li>
+        <li><strong>GitHub Pages</strong> — free hosting for static files</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>👩‍🏫 Developed By</h2>
+      <p>
+        Created by <strong>Mohammad Ghani bin Awang Ahmad</strong> as part of educational innovation efforts under the
+        <strong>Education Specialist Unit, Ministry of Education Brunei Darussalam</strong>.
+      </p>
+    </section>
+
+    <p style="margin-top:30px;">
+      <a href="index.html">← Back to Simulation</a>
+    </p>
+
+  </main>
+
+  <footer>
+    <p>© 2025 COVID-19 Educational Simulation • Built for learning and public awareness</p>
+  </footer>
+
+</body>
+</html>

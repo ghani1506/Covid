@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2113.65">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!doctype html&gt;</p>
+<p class="p1">&lt;html&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="utf-8"/&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;COVID-19 Educational Simulator (Web)&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt; body{font-family:sans-serif;margin:16px} #row{display:flex;gap:16px} #ui{width:340px} #c{border:1px solid #ccc} &lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;h2&gt;COVID-19 Educational Simulator (Web)&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="ui"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div&gt;Population &lt;input id="pop" type="range" min="50" max="800" step="10" value="300"&gt; &lt;span id="popv"&gt;300&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div&gt;Mobility &lt;input id="mob" type="range" min="0.2" max="1.2" step="0.01" value="1"&gt; &lt;span id="mobv"&gt;1.00&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div&gt;Masks &lt;input id="mask" type="range" min="0" max="1" step="0.01" value="0.5"&gt; &lt;span id="maskv"&gt;50%&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div&gt;Distancing &lt;input id="dist" type="range" min="0" max="1" step="0.01" value="0"&gt; &lt;span id="distv"&gt;0%&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div&gt;β &lt;input id="beta" type="range" min="0.1" max="1.5" step="0.01" value="0.85"&gt; &lt;span id="betav"&gt;0.85&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div&gt;Incubation (d) &lt;input id="inc" type="range" min="1" max="10" step="0.1" value="4.5"&gt; &lt;span id="incv"&gt;4.5&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div&gt;Infectious (d) &lt;input id="inf" type="range" min="2" max="14" step="0.1" value="6"&gt; &lt;span id="infv"&gt;6.0&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div&gt;Vaccinated &lt;input id="vax" type="range" min="0" max="1" step="0.01" value="0.2"&gt; &lt;span id="vaxv"&gt;20%&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;button id="start"&gt;Start/Pause&lt;/button&gt; &lt;button id="reset"&gt;Reset&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;p id="hud"&gt;Ready&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;canvas id="c" width="800" height="520"&gt;&lt;/canvas&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script src="https://cdn.jsdelivr.net/pyodide/v0.29.0/full/pyodide.js"&gt;&lt;/script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script type="module" src="main.js"&gt;&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
