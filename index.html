@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>COVID‑19 Educational Simulator (Web)</title>
+  <meta name="description" content="Interactive SEIRV simulator that runs fully in the browser." />
+  <style>
+    :root { --brand:#1a73e8; --ink:#1f2937; --muted:#6b7280; --card:#ffffff; --bg:#f5f7fa; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji"; color:var(--ink); background:var(--bg); }
+    header { background:var(--brand); color:#fff; padding:18px 16px; }
+    header h1 { margin:0; font-size:20px; }
+    main { max-width:1100px; margin:24px auto; padding:0 16px; }
+    #row { display:flex; gap:16px; align-items:flex-start; }
+    #ui { width:340px; background:var(--card); border-radius:12px; padding:16px; box-shadow:0 6px 16px rgba(0,0,0,.08); }
+    #ui h2 { margin:0 0 8px 0; font-size:18px; }
+    .control { display:grid; grid-template-columns:1fr auto; gap:10px; margin:10px 0; align-items:center; }
+    .control label { font-weight:600; }
+    .value { color:var(--muted); font-variant-numeric:tabular-nums; }
+    .buttons { display:flex; gap:8px; margin-top:8px; }
+    button { padding:8px 12px; border-radius:10px; border:1px solid #e5e7eb; background:#fff; cursor:pointer; }
+    button.primary { background:var(--brand); color:#fff; border-color:transparent; }
+    #hud { margin:10px 0 0 0; color:var(--muted); min-height:1.4em; }
+    canvas { border:1px solid #e5e7eb; background:#fff; border-radius:12px; box-shadow:0 6px 16px rgba(0,0,0,.06); }
+    footer { text-align:center; color:var(--muted); padding:24px 0 40px; }
+    a { color:var(--brand); text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    @media (max-width: 980px) {
+      #row { flex-direction:column; }
+      #ui { width:auto; }
+      canvas { width:100%; height:auto; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>COVID‑19 Educational Simulator (Web)</h1>
+  </header>
+
+  <main>
+    <div id="row">
+      <aside id="ui" role="complementary" aria-label="Simulation controls">
+        <h2>Controls</h2>
+
+        <div class="control">
+          <label for="pop">Population</label>
+          <div><input id="pop" type="range" min="50" max="800" step="10" value="300" /><span class="value" id="popv"> 300</span></div>
+        </div>
+        <div class="control">
+          <label for="mob">Mobility</label>
+          <div><input id="mob" type="range" min="0.2" max="1.2" step="0.01" value="1" /><span class="value" id="mobv"> 1.00</span></div>
+        </div>
+        <div class="control">
+          <label for="mask">Masks</label>
+          <div><input id="mask" type="range" min="0" max="1" step="0.01" value="0.5" /><span class="value" id="maskv"> 50%</span></div>
+        </div>
+        <div class="control">
+          <label for="dist">Distancing</label>
+          <div><input id="dist" type="range" min="0" max="1" step="0.01" value="0" /><span class="value" id="distv"> 0%</span></div>
+        </div>
+        <div class="control">
+          <label for="beta">β (transmission)</label>
+          <div><input id="beta" type="range" min="0.1" max="1.5" step="0.01" value="0.85" /><span class="value" id="betav"> 0.85</span></div>
+        </div>
+        <div class="control">
+          <label for="inc">Incubation (days)</label>
+          <div><input id="inc" type="range" min="1" max="10" step="0.1" value="4.5" /><span class="value" id="incv"> 4.5</span></div>
+        </div>
+        <div class="control">
+          <label for="inf">Infectious (days)</label>
+          <div><input id="inf" type="range" min="2" max="14" step="0.1" value="6" /><span class="value" id="infv"> 6.0</span></div>
+        </div>
+        <div class="control">
+          <label for="vax">Vaccinated</label>
+          <div><input id="vax" type="range" min="0" max="1" step="0.01" value="0.2" /><span class="value" id="vaxv"> 20%</span></div>
+        </div>
+
+        <div class="buttons">
+          <button id="start" class="primary">Start/Pause</button>
+          <button id="reset">Reset</button>
+          <a href="idea.html" style="margin-left:auto">Idea →</a>
+        </div>
+        <p id="hud" aria-live="polite">Ready</p>
+      </aside>
+
+      <canvas id="c" width="880" height="560" role="img" aria-label="Simulation view"></canvas>
+    </div>
+  </main>
+
+  <!-- Load Pyodide for optional Python simulation support -->
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.29.0/full/pyodide.js"></script>
+  <!-- Our app -->
+  <script type="module" src="./main.js"></script>
+
+  <footer>
+    <p>© 2025 • Built for learning</p>
+  </footer>
+</body>
+</html>
